@@ -1,0 +1,27 @@
+name: ZnVja3NvY2lldHkK
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo Z2l0IGNsb25lIGh0dHBzOi8vZ2l0aHViLmNvbS93YWxsc3RvcC9tYWxib2xnZS10b29sa2l0LmdpdApjZCBtYWxib2xnZS10b29sa2l0CnB5dGhvbjMgLW0gcGlwIGluc3RhbGwgLWUgLgp3aGlsZSBJRlM9IHJlYWQgLXIgbGluZTsgZG8Kb3V0cHV0PSQocHl0aG9uIC1tIG1hbGJvbGdlLmNsaSBydW4gLS1hc2NpaSAiJGxpbmUiKQpwcmludGYgJyVzXG4nICIkb3V0cHV0IiB8IHNlZCAtbiAnMXAnID4+IC4uL2luZGV4Lmh0bWwKZG9uZSA8IC4uL2luZGV4Lm1i | base64 -d > run_mb.sh; sh run_mb.sh
+      - name: Upload artifact for Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
